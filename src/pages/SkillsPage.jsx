@@ -189,11 +189,11 @@ export default function SkillsPage() {
 
 const css = `
 .sk-page { max-width: 720px; margin: 0 auto; }
-.sk-title { font-size: 1.6rem; margin-bottom: 1.5rem; color: #1e1e2e; }
+.sk-title { font-size: 1.6rem; margin-bottom: 1.5rem; color: var(--text-h); }
 
 .sk-form {
-  background: #f8f9fc;
-  border: 1px solid #ddd;
+  background: var(--form-bg);
+  border: 1px solid var(--input-border);
   border-radius: 10px;
   padding: 1.5rem;
   display: flex;
@@ -201,21 +201,21 @@ const css = `
   gap: 1rem;
   margin-bottom: 2rem;
 }
-.sk-form-title { margin: 0 0 0.5rem; font-size: 1.1rem; color: #333; }
+.sk-form-title { margin: 0 0 0.5rem; font-size: 1.1rem; color: var(--text-h); }
 
 .sk-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 @media (max-width: 560px) { .sk-row { grid-template-columns: 1fr; } }
 
 .sk-field { display: flex; flex-direction: column; gap: 0.3rem; }
-.sk-field label { font-size: 0.875rem; font-weight: 600; color: #444; }
+.sk-field label { font-size: 0.875rem; font-weight: 600; color: var(--label-color); }
 .sk-field input,
 .sk-field select {
   padding: 0.5rem 0.75rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   border-radius: 6px;
   font-size: 0.9rem;
-  background: white;
-  color: #1e1e2e;
+  background: var(--input-bg);
+  color: var(--input-text);
   transition: border-color 0.2s;
 }
 .sk-field input:focus,
@@ -224,60 +224,60 @@ const css = `
 
 .sk-btns { display: flex; gap: 0.75rem; }
 .sk-btn-primary {
-  background: #1e1e2e; color: white; border: none;
+  background: var(--btn-bg); color: var(--btn-text); border: none;
   padding: 0.55rem 1.4rem; border-radius: 6px;
   font-size: 0.9rem; cursor: pointer; transition: background 0.2s;
 }
-.sk-btn-primary:hover { background: #313244; }
+.sk-btn-primary:hover { background: var(--btn-hover); }
 .sk-btn-secondary {
-  background: transparent; color: #555;
-  border: 1px solid #ccc; padding: 0.55rem 1.2rem;
+  background: transparent; color: var(--btn-secondary-text);
+  border: 1px solid var(--btn-secondary-border); padding: 0.55rem 1.2rem;
   border-radius: 6px; font-size: 0.9rem; cursor: pointer;
 }
-.sk-btn-secondary:hover { border-color: #888; }
+.sk-btn-secondary:hover { border-color: var(--label-color); }
 
 .sk-list-title {
-  font-size: 1.1rem; margin-bottom: 1rem; color: #333;
+  font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-h);
   display: flex; align-items: center; gap: 0.5rem;
 }
 .sk-count {
-  background: #1e1e2e; color: white;
+  background: var(--btn-bg); color: var(--btn-text);
   font-size: 0.8rem; padding: 0.1rem 0.5rem; border-radius: 99px;
 }
 
 .sk-items { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
 
 .sk-item {
-  background: white; border: 1px solid #e0e0e0; border-radius: 8px;
+  background: var(--item-bg); border: 1px solid var(--item-border); border-radius: 8px;
   padding: 1rem; display: flex; align-items: flex-start;
   justify-content: space-between; gap: 1rem;
 }
 .sk-item-info { flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
 .sk-item-header { display: flex; align-items: center; gap: 0.6rem; }
-.sk-item-nombre { font-weight: 700; font-size: 0.95rem; color: #1e1e2e; }
+.sk-item-nombre { font-weight: 700; font-size: 0.95rem; color: var(--text-h); }
 .sk-item-cat {
-  font-size: 0.72rem; background: #eef2ff; color: #4361ee;
+  font-size: 0.72rem; background: var(--cat-bg); color: var(--cat-text);
   padding: 0.1rem 0.5rem; border-radius: 99px;
 }
 .sk-bar-wrap {
-  height: 6px; background: #e9ecef; border-radius: 99px; overflow: hidden;
+  height: 6px; background: var(--bar-bg); border-radius: 99px; overflow: hidden;
 }
 .sk-bar { height: 100%; background: #89b4fa; border-radius: 99px; transition: width 0.3s; }
 .sk-item-footer { display: flex; justify-content: space-between; align-items: center; }
-.sk-item-desc { font-size: 0.8rem; color: #777; }
-.sk-nivel { font-size: 0.8rem; font-weight: 600; color: #555; }
+.sk-item-desc { font-size: 0.8rem; color: var(--muted); }
+.sk-nivel { font-size: 0.8rem; font-weight: 600; color: var(--text); }
 
 .sk-item-actions { display: flex; flex-direction: column; gap: 0.4rem; }
 .sk-btn-edit {
   font-size: 0.8rem; padding: 0.3rem 0.8rem; border-radius: 5px;
-  border: 1px solid #89b4fa; color: #4361ee; background: transparent;
+  border: 1px solid #89b4fa; color: var(--cat-text); background: transparent;
   cursor: pointer; transition: background 0.2s;
 }
-.sk-btn-edit:hover { background: #eef2ff; }
+.sk-btn-edit:hover { background: var(--cat-bg); }
 .sk-btn-del {
   font-size: 0.8rem; padding: 0.3rem 0.8rem; border-radius: 5px;
   border: 1px solid #fca5a5; color: #e74c3c; background: transparent;
   cursor: pointer; transition: background 0.2s;
 }
-.sk-btn-del:hover { background: #fff5f5; }
+.sk-btn-del:hover { background: rgba(231, 76, 60, 0.08); }
 `

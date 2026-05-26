@@ -6,7 +6,7 @@
 .pi-title {
   font-size: 1.6rem;
   margin-bottom: 1.5rem;
-  color: #1e1e2e;
+  color: var(--text-h);
 }
 
 .pi-form {
@@ -33,12 +33,12 @@
   justify-content: center;
   cursor: pointer;
   overflow: hidden;
-  background-color: #f0f4ff;
+  background-color: var(--form-bg);
   transition: border-color 0.2s;
 }
 
 .pi-foto-preview:hover {
-  border-color: #1e1e2e;
+  border-color: var(--btn-bg);
 }
 
 .pi-foto-preview img {
@@ -54,7 +54,7 @@
 
 .pi-foto-hint {
   font-size: 0.78rem;
-  color: #888;
+  color: var(--muted);
 }
 
 /* Filas de 2 columnas */
@@ -80,18 +80,18 @@
 .pi-field label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #333;
+  color: var(--label-color);
 }
 
 .pi-field input,
 .pi-field textarea {
   padding: 0.5rem 0.75rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   border-radius: 6px;
   font-size: 0.9rem;
   transition: border-color 0.2s;
-  background: white;
-  color: #1e1e2e;
+  background: var(--input-bg);
+  color: var(--input-text);
 }
 
 .pi-field input:focus,
@@ -111,7 +111,7 @@
 
 /* Links fieldset */
 .pi-links {
-  border: 1px solid #ddd;
+  border: 1px solid var(--input-border);
   border-radius: 8px;
   padding: 1rem 1.25rem;
   display: flex;
@@ -123,14 +123,14 @@
   font-weight: 700;
   font-size: 0.9rem;
   padding: 0 0.5rem;
-  color: #555;
+  color: var(--legend-color);
 }
 
 /* Botón */
 .pi-btn {
   align-self: flex-end;
-  background-color: #1e1e2e;
-  color: white;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
   border: none;
   padding: 0.6rem 1.5rem;
   border-radius: 6px;
@@ -140,5 +140,5 @@
 }
 
 .pi-btn:hover {
-  background-color: #313244;
+  background-color: var(--btn-hover);
 }
