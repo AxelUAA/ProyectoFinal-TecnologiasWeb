@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import PersonalInfoPage from './pages/PersonalInfoPage'
-import SkillsPage from './pages/SkillsPage'
-import DashboardPage from './pages/DashboardPage'
+import HomePage from './pages/HomePage'
+import EditorPage from './pages/EditorPage'
 import PreviewPage from './pages/PreviewPage'
+import DashboardPage from './pages/DashboardPage'
+import AboutPage from './pages/AboutPage'
 import './App.css'
 
 function App() {
@@ -12,10 +13,11 @@ function App() {
       <Navbar />
       <main className="main-content">
         <Routes>
-          <Route path="/" element={<PersonalInfoPage />} />
-          <Route path="/habilidades" element={<SkillsPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/editor" element={<EditorPage />} />
           <Route path="/preview" element={<PreviewPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </main>
     </div>

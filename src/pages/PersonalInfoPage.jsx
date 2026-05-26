@@ -16,7 +16,7 @@ const INITIAL = {
   portfolio: '',
 }
 
-export default function PersonalInfoPage() {
+export default function PersonalInfoPage({ embedded = false }) {
   const { personalInfo, updatePersonalInfo } = useCV()
   const { values, errors, handleChange, handleSubmit, setValues } = useFormValidation(
     INITIAL,
@@ -43,7 +43,7 @@ export default function PersonalInfoPage() {
 
   return (
     <div className="pi-page">
-      <h1 className="pi-title">Datos Personales</h1>
+      {!embedded && <h1 className="pi-title">Datos Personales</h1>}
 
       <form className="pi-form" onSubmit={handleSubmit(onSubmit)} noValidate>
 

@@ -6,12 +6,12 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <span className="nav-brand">CV Builder</span>
+      <NavLink to="/" className="nav-brand" end>CV Builder</NavLink>
       <ul className="nav-links">
-        <li><NavLink to="/" end>Datos Personales</NavLink></li>
-        <li><NavLink to="/habilidades">Habilidades</NavLink></li>
-        <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+        <li><NavLink to="/editor">Editor</NavLink></li>
         <li><NavLink to="/preview">Vista Previa</NavLink></li>
+        <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+        <li><NavLink to="/about">Acerca de</NavLink></li>
       </ul>
       <div className="nav-right">
         <button
