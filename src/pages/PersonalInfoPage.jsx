@@ -5,23 +5,14 @@ import { validatePersonalInfo } from '../utils/validations'
 import './PersonalInfoPage.css'
 
 const INITIAL = {
-  nombre: '',
-  profesion: '',
-  ciudad: '',
-  email: '',
-  telefono: '',
-  descripcion: '',
-  linkedin: '',
-  github: '',
-  portfolio: '',
+  nombre: '', profesion: '', ciudad: '', email: '',
+  telefono: '', descripcion: '', linkedin: '', github: '', portfolio: '',
 }
 
 export default function PersonalInfoPage({ embedded = false }) {
   const { personalInfo, updatePersonalInfo } = useCV()
-  const { values, errors, handleChange, handleSubmit, setValues } = useFormValidation(
-    INITIAL,
-    validatePersonalInfo
-  )
+  const { values, errors, handleChange, handleSubmit, setValues } =
+    useFormValidation(INITIAL, validatePersonalInfo)
   const fotoRef = useRef(null)
 
   useEffect(() => {
@@ -47,143 +38,95 @@ export default function PersonalInfoPage({ embedded = false }) {
 
       <form className="pi-form" onSubmit={handleSubmit(onSubmit)} noValidate>
 
-        {/* Foto de perfil */}
         <div className="pi-foto-section">
-          <div className="pi-foto-preview" onClick={() => fotoRef.current.click()}>
+          <div
+            className="pi-foto-preview"
+            onClick={() => fotoRef.current.click()}
+            role="button"
+            tabIndex={0}
+            aria-label="Subir foto de perfil"
+            onKeyDown={e => e.key === 'Enter' && fotoRef.current.click()}
+          >
             {personalInfo.foto
               ? <img src={personalInfo.foto} alt="Foto de perfil" />
               : <span>+ Foto</span>
             }
           </div>
-          <input
-            ref={fotoRef}
-            type="file"
-            accept="image/*"
-            onChange={handleFoto}
-            hidden
-          />
-          <p className="pi-foto-hint">Haz clic para subir una imagen</p>
+          <input ref={fotoRef} type="file" accept="image/*" onChange={handleFoto} hidden />
+          <div className="pi-foto-meta">
+            <strong>Foto de perfil</strong>
+            <p className="pi-foto-hint">JPG, PNG o GIF — clic para subir</p>
+          </div>
         </div>
 
-        {/* Fila: Nombre + Profesión */}
         <div className="pi-row">
           <div className="pi-field">
             <label htmlFor="nombre">Nombre completo *</label>
-            <input
-              id="nombre"
-              name="nombre"
-              type="text"
-              value={values.nombre}
-              onChange={handleChange}
-              placeholder="Ej. Juan Pérez"
-            />
+            <input id="nombre" name="nombre" type="text"
+              value={values.nombre} onChange={handleChange}
+              placeholder="Ej. Juan Perez" />
             {errors.nombre && <span className="pi-error">{errors.nombre}</span>}
           </div>
-
           <div className="pi-field">
-            <label htmlFor="profesion">Carrera / Profesión *</label>
-            <input
-              id="profesion"
-              name="profesion"
-              type="text"
-              value={values.profesion}
-              onChange={handleChange}
-              placeholder="Ej. Ingeniería en Sistemas"
-            />
+            <label htmlFor="profesion">Carrera / Profesion *</label>
+            <input id="profesion" name="profesion" type="text"
+              value={values.profesion} onChange={handleChange}
+              placeholder="Ej. Ingenieria en Sistemas" />
             {errors.profesion && <span className="pi-error">{errors.profesion}</span>}
           </div>
         </div>
 
-        {/* Fila: Ciudad + Teléfono */}
         <div className="pi-row">
           <div className="pi-field">
             <label htmlFor="ciudad">Ciudad</label>
-            <input
-              id="ciudad"
-              name="ciudad"
-              type="text"
-              value={values.ciudad}
-              onChange={handleChange}
-              placeholder="Ej. Guadalajara, México"
-            />
+            <input id="ciudad" name="ciudad" type="text"
+              value={values.ciudad} onChange={handleChange}
+              placeholder="Ej. Guadalajara, Mexico" />
           </div>
-
           <div className="pi-field">
-            <label htmlFor="telefono">Teléfono *</label>
-            <input
-              id="telefono"
-              name="telefono"
-              type="tel"
-              value={values.telefono}
-              onChange={handleChange}
-              placeholder="Ej. +52 33 1234 5678"
-            />
+            <label htmlFor="telefono">Telefono *</label>
+            <input id="telefono" name="telefono" type="tel"
+              value={values.telefono} onChange={handleChange}
+              placeholder="Ej. +52 33 1234 5678" />
             {errors.telefono && <span className="pi-error">{errors.telefono}</span>}
           </div>
         </div>
 
-        {/* Email */}
         <div className="pi-field">
           <label htmlFor="email">Email *</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            value={values.email}
-            onChange={handleChange}
-            placeholder="Ej. juan@correo.com"
-          />
+          <input id="email" name="email" type="email"
+            value={values.email} onChange={handleChange}
+            placeholder="Ej. juan@correo.com" />
           {errors.email && <span className="pi-error">{errors.email}</span>}
         </div>
 
-        {/* Descripción */}
         <div className="pi-field">
-          <label htmlFor="descripcion">Descripción / Perfil profesional</label>
-          <textarea
-            id="descripcion"
-            name="descripcion"
-            value={values.descripcion}
-            onChange={handleChange}
+          <label htmlFor="descripcion">Descripcion / Perfil profesional</label>
+          <textarea id="descripcion" name="descripcion"
+            value={values.descripcion} onChange={handleChange}
             placeholder="Breve resumen sobre ti y tus objetivos profesionales..."
-            rows={4}
-          />
+            rows={4} />
         </div>
 
-        {/* Links */}
         <fieldset className="pi-links">
           <legend>Links</legend>
           <div className="pi-field">
             <label htmlFor="linkedin">LinkedIn</label>
-            <input
-              id="linkedin"
-              name="linkedin"
-              type="url"
-              value={values.linkedin}
-              onChange={handleChange}
-              placeholder="https://linkedin.com/in/tu-perfil"
-            />
+            <input id="linkedin" name="linkedin" type="url"
+              value={values.linkedin} onChange={handleChange}
+              placeholder="https://linkedin.com/in/tu-perfil" />
           </div>
           <div className="pi-field">
             <label htmlFor="github">GitHub</label>
-            <input
-              id="github"
-              name="github"
-              type="url"
-              value={values.github}
-              onChange={handleChange}
-              placeholder="https://github.com/tu-usuario"
-            />
+            <input id="github" name="github" type="url"
+              value={values.github} onChange={handleChange}
+              placeholder="https://github.com/tu-usuario" />
           </div>
           <div className="pi-field">
             <label htmlFor="portfolio">Portfolio</label>
-            <input
-              id="portfolio"
-              name="portfolio"
-              type="url"
-              value={values.portfolio}
-              onChange={handleChange}
-              placeholder="https://tu-portfolio.com"
-            />
+            <input id="portfolio" name="portfolio" type="url"
+              value={values.portfolio} onChange={handleChange}
+              placeholder="https://tu-portfolio.com" />
           </div>
         </fieldset>
 
