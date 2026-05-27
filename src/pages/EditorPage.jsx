@@ -1,10 +1,16 @@
 import { useState } from 'react'
 import PersonalInfoPage from './PersonalInfoPage'
 import SkillsPage from './SkillsPage'
+import ProjectsPage from './ProjectsPage'
+import EducacionPage from './EducacionPage'
+import ExperienciaPage from './ExperienciaPage'
 
 const TABS = [
   { id: 'personal',    label: 'Datos personales' },
   { id: 'habilidades', label: 'Habilidades' },
+  { id: 'proyectos',   label: 'Proyectos' },
+  { id: 'educacion',   label: 'Educación' },
+  { id: 'experiencia', label: 'Experiencia' },
 ]
 
 export default function EditorPage() {
@@ -44,6 +50,9 @@ export default function EditorPage() {
         >
           {activeTab === 'personal'    && <PersonalInfoPage embedded />}
           {activeTab === 'habilidades' && <SkillsPage />}
+          {activeTab === 'proyectos'   && <ProjectsPage />}
+          {activeTab === 'educacion'   && <EducacionPage />}
+          {activeTab === 'experiencia' && <ExperienciaPage />}
         </div>
       </div>
     </>
