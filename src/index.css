@@ -4,51 +4,51 @@
    DESIGN TOKENS — CV Builder
    ============================================================ */
 :root {
-  --accent:         #7c3aed;
-  --accent-hover:   #6d28d9;
-  --accent-subtle:  rgba(124, 58, 237, 0.08);
-  --accent-border:  rgba(124, 58, 237, 0.22);
-  --accent-glow:    rgba(124, 58, 237, 0.16);
+  --accent:         #2563eb;
+  --accent-hover:   #1d4ed8;
+  --accent-subtle:  rgba(37, 99, 235, 0.08);
+  --accent-border:  rgba(37, 99, 235, 0.22);
+  --accent-glow:    rgba(37, 99, 235, 0.16);
 
-  --bg:             #f7f7fb;
+  --bg:             #f5f7fb;
   --surface:        #ffffff;
-  --surface-sunken: #f0f0f7;
+  --surface-sunken: #eef1f8;
 
-  --text-h:         #0e0e1a;
-  --text:           #5a5a78;
-  --text-muted:     #9595b0;
+  --text-h:         #0a0e1a;
+  --text:           #4a5068;
+  --text-muted:     #8e95b0;
 
-  --border:         #e2e2f0;
-  --input-border:   #d0d0e8;
+  --border:         #dde2f0;
+  --input-border:   #c8d0e8;
 
-  --nav-bg:         #0f0f1a;
-  --nav-text:       #b8b8d0;
+  --nav-bg:         #0f1322;
+  --nav-text:       #b0b8d0;
   --nav-hover-bg:   rgba(255,255,255,0.07);
-  --nav-active-bg:  #7c3aed;
+  --nav-active-bg:  #2563eb;
   --nav-active-text:#ffffff;
 
-  --btn-bg:         #7c3aed;
+  --btn-bg:         #2563eb;
   --btn-text:       #ffffff;
-  --btn-hover:      #6d28d9;
-  --btn-secondary-text:   #5a5a78;
-  --btn-secondary-border: #d0d0e8;
+  --btn-hover:      #1d4ed8;
+  --btn-secondary-text:   #4a5068;
+  --btn-secondary-border: #c8d0e8;
 
   --input-bg:       #ffffff;
-  --input-text:     #0e0e1a;
-  --label-color:    #5a5a78;
-  --legend-color:   #7272a0;
+  --input-text:     #0a0e1a;
+  --label-color:    #4a5068;
+  --legend-color:   #6070a0;
 
   --form-bg:        #ffffff;
   --item-bg:        #ffffff;
-  --item-border:    #e2e2f0;
+  --item-border:    #dde2f0;
 
-  --social-bg:      rgba(240,240,247,0.6);
-  --code-bg:        #f0f0f7;
+  --social-bg:      rgba(238,241,248,0.6);
+  --code-bg:        #eef1f8;
 
-  --cat-bg:         rgba(124, 58, 237, 0.08);
-  --cat-text:       #7c3aed;
-  --bar-bg:         #e2e2f0;
-  --muted:          #9595b0;
+  --cat-bg:         rgba(37, 99, 235, 0.08);
+  --cat-text:       #2563eb;
+  --bar-bg:         #dde2f0;
+  --muted:          #8e95b0;
 
   --shadow:         0 4px 24px rgba(14,14,26,0.08);
 
@@ -75,11 +75,11 @@
 :root.dark {
   color-scheme: dark;
 
-  --accent:         #a78bfa;
-  --accent-hover:   #c4b5fd;
-  --accent-subtle:  rgba(167,139,250,0.10);
-  --accent-border:  rgba(167,139,250,0.22);
-  --accent-glow:    rgba(167,139,250,0.12);
+  --accent:         #60a5fa;
+  --accent-hover:   #93c5fd;
+  --accent-subtle:  rgba(96,165,250,0.10);
+  --accent-border:  rgba(96,165,250,0.22);
+  --accent-glow:    rgba(96,165,250,0.12);
 
   --bg:             #0d0d16;
   --surface:        #12121e;
@@ -94,9 +94,9 @@
 
   --nav-bg:         #09090f;
 
-  --btn-bg:         #a78bfa;
-  --btn-text:       #0d0d16;
-  --btn-hover:      #c4b5fd;
+  --btn-bg:         #3b82f6;
+  --btn-text:       #ffffff;
+  --btn-hover:      #60a5fa;
   --btn-secondary-text:   #9494b4;
   --btn-secondary-border: #2a2a44;
 
@@ -112,8 +112,8 @@
   --social-bg:      rgba(24,24,44,0.6);
   --code-bg:        #18182c;
 
-  --cat-bg:         rgba(167,139,250,0.10);
-  --cat-text:       #a78bfa;
+  --cat-bg:         rgba(96,165,250,0.10);
+  --cat-text:       #60a5fa;
   --bar-bg:         #1e1e34;
   --muted:          #5e5e7e;
 

@@ -1,3 +1,8 @@
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
+  ResponsiveContainer, Cell,
+  PieChart, Pie, Legend,
+} from 'recharts'
 import { useCV } from '../context/CVContext'
 
 const Ico = ({ children, size = 28 }) => (
@@ -20,6 +25,15 @@ const CATEGORIAS = [
   'Programacion','Bases de datos','Diseno web',
   'Idiomas','Herramientas de desarrollo','Habilidades blandas',
 ]
+
+const CAT_COLORS = {
+  'Programacion':            '#2563eb',
+  'Bases de datos':          '#2563eb',
+  'Diseno web':              '#0891b2',
+  'Idiomas':                 '#059669',
+  'Herramientas de desarrollo': '#d97706',
+  'Habilidades blandas':     '#db2777',
+}
 
 export default function DashboardPage() {
   const { skills, personalInfo } = useCV()
@@ -99,6 +113,70 @@ export default function DashboardPage() {
               </section>
             )}
 
+            {/* ── Gráfica de barras: nivel por habilidad ── */}
+            <section className="db-section">
+              <h2 className="db-section-title">Nivel por habilidad</h2>
+              <div className="db-chart-wrap">
+                <ResponsiveContainer width="100%" height={Math.max(220, skills.length * 38)}>
+                  <BarChart
+                    data={[...skills].sort((a, b) => b.nivel - a.nivel)}
+                    layout="vertical"
+                    margin={{ top: 4, right: 48, left: 8, bottom: 4 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="var(--border)" />
+                    <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 11, fill: 'var(--muted)' }} tickFormatter={v => `${v}%`} />
+                    <YAxis type="category" dataKey="nombre" width={110} tick={{ fontSize: 12, fill: 'var(--text-h)', fontWeight: 600 }} />
+                    <Tooltip
+                      formatter={(value) => [`${value}%`, 'Nivel']}
+                      contentStyle={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 12 }}
+                      cursor={{ fill: 'var(--accent-subtle)' }}
+                    />
+                    <Bar dataKey="nivel" radius={[0, 6, 6, 0]} maxBarSize={22}>
+                      {skills.map((s) => (
+                        <Cell
+                          key={s.id}
+                          fill={CAT_COLORS[s.categoria] || '#7c3aed'}
+                        />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </section>
+
+            {/* ── Gráfica de dona: distribución por categoría ── */}
+            {byCategory.length > 1 && (
+              <section className="db-section">
+                <h2 className="db-section-title">Distribucion por categoria</h2>
+                <div className="db-chart-wrap db-chart-wrap--pie">
+                  <ResponsiveContainer width="100%" height={280}>
+                    <PieChart>
+                      <Pie
+                        data={byCategory.map(g => ({ name: g.cat, value: g.items.length }))}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={100}
+                        paddingAngle={3}
+                        dataKey="value"
+                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                        labelLine={false}
+                      >
+                        {byCategory.map((g) => (
+                          <Cell key={g.cat} fill={CAT_COLORS[g.cat] || '#7c3aed'} />
+                        ))}
+                      </Pie>
+                      <Tooltip
+                        formatter={(value, name) => [value, name]}
+                        contentStyle={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 12 }}
+                      />
+                      <Legend iconType="circle" iconSize={10} wrapperStyle={{ fontSize: 12 }} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              </section>
+            )}
+
             <section className="db-section">
               <h2 className="db-section-title">Por categoria</h2>
               <div className="db-cats">
@@ -151,6 +229,15 @@ const css = `
 
 .db-content { display: flex; flex-direction: column; gap: 2rem; }
 
+.db-chart-wrap {
+  background: var(--form-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1rem 1rem;
+  overflow: hidden;
+}
+.db-chart-wrap--pie { padding: 1rem; }
+
 .db-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -202,7 +289,7 @@ const css = `
 .db-bar-bg--sm { height: 4px; }
 .db-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent) 0%, #5b21b6 100%);
+  background: linear-gradient(90deg, var(--accent) 0%, #1e40af 100%);
   border-radius: 999px; transition: width 0.5s ease;
 }
 
