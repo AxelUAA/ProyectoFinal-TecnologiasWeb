@@ -16,7 +16,9 @@ export default function PersonalInfoPage({ embedded = false }) {
   const fotoRef = useRef(null)
 
   useEffect(() => {
-    setValues({ ...INITIAL, ...personalInfo, foto: undefined })
+    // foto se maneja por separado (no vive en values), se excluye del form
+    const { foto: _foto, ...rest } = personalInfo
+    setValues({ ...INITIAL, ...rest })
   }, [])
 
   const handleFoto = (e) => {
@@ -28,7 +30,8 @@ export default function PersonalInfoPage({ embedded = false }) {
   }
 
   const onSubmit = (vals) => {
-    updatePersonalInfo(vals)
+    // Preserva la foto que ya está en contexto — no vive en vals del formulario
+    updatePersonalInfo({ ...vals, foto: personalInfo.foto })
     alert('Datos guardados correctamente.')
   }
 
