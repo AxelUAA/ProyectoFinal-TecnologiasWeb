@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useCV } from '../context/CVContext'
 import { validateProyecto } from '../utils/validations'
+import { confirmDialog, toastSuccess } from '../utils/toast'
 
 const INITIAL = {
   nombre: '', descripcion: '', tecnologias: '',
@@ -26,8 +27,14 @@ export default function ProjectsPage() {
     e.preventDefault()
     const errs = validateProyecto(values, existingNames())
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
-    if (editingId) { editProyecto(editingId, values); setEditingId(null) }
-    else { addProyecto(values) }
+    if (editingId) {
+      editProyecto(editingId, values)
+      setEditingId(null)
+      toastSuccess('Proyecto actualizado.')
+    } else {
+      addProyecto(values)
+      toastSuccess(`"${values.nombre}" agregado.`)
+    }
     setValues(INITIAL)
     setErrors({})
   }
@@ -44,6 +51,20 @@ export default function ProjectsPage() {
     })
     setErrors({})
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleDelete = async (proyecto) => {
+    const confirmed = await confirmDialog({
+      title: '¿Eliminar proyecto?',
+      text: `"${proyecto.nombre}" será eliminado de tu CV.`,
+      confirmText: 'Sí, eliminar',
+      cancelText: 'Cancelar',
+      icon: 'warning',
+    })
+    if (confirmed) {
+      deleteProyecto(proyecto.id)
+      toastSuccess(`"${proyecto.nombre}" eliminado.`)
+    }
   }
 
   const handleCancel = () => { setEditingId(null); setValues(INITIAL); setErrors({}) }
@@ -149,7 +170,7 @@ export default function ProjectsPage() {
                     <button className="pj-btn-edit" onClick={() => handleEdit(proyecto)}>
                       Editar
                     </button>
-                    <button className="pj-btn-del" onClick={() => deleteProyecto(proyecto.id)}>
+                    <button className="pj-btn-del" onClick={() => handleDelete(proyecto)}>
                       Eliminar
                     </button>
                   </div>

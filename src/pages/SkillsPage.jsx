@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useCV } from '../context/CVContext'
 import { validateSkill } from '../utils/validations'
+import { confirmDialog, toastSuccess } from '../utils/toast'
 
 const CATEGORIAS = [
   'Programacion','Bases de datos','Diseno web',
@@ -29,8 +30,14 @@ export default function SkillsPage() {
     const errs = validateSkill(values, existingNames())
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
     const data = { ...values, nivel: Number(values.nivel) }
-    if (editingId) { editSkill(editingId, data); setEditingId(null) }
-    else { addSkill(data) }
+    if (editingId) {
+      editSkill(editingId, data)
+      setEditingId(null)
+      toastSuccess('Habilidad actualizada.')
+    } else {
+      addSkill(data)
+      toastSuccess(`"${values.nombre}" agregada.`)
+    }
     setValues(INITIAL)
     setErrors({})
   }
@@ -43,7 +50,19 @@ export default function SkillsPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const handleCancel = () => { setEditingId(null); setValues(INITIAL); setErrors({}) }
+  const handleDelete = async (skill) => {
+    const confirmed = await confirmDialog({
+      title: '¿Eliminar habilidad?',
+      text: `"${skill.nombre}" será eliminada de tu CV.`,
+      confirmText: 'Sí, eliminar',
+      cancelText: 'Cancelar',
+      icon: 'warning',
+    })
+    if (confirmed) {
+      deleteSkill(skill.id)
+      toastSuccess(`"${skill.nombre}" eliminada.`)
+    }
+  }
 
   return (
     <>
@@ -129,7 +148,7 @@ export default function SkillsPage() {
                     <button className="sk-btn-edit" onClick={() => handleEdit(skill)}>
                       Editar
                     </button>
-                    <button className="sk-btn-del" onClick={() => deleteSkill(skill.id)}>
+                    <button className="sk-btn-del" onClick={() => handleDelete(skill)}>
                       Eliminar
                     </button>
                   </div>

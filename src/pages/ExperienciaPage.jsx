@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useCV } from '../context/CVContext'
 import { validateExperiencia } from '../utils/validations'
+import { confirmDialog, toastSuccess } from '../utils/toast'
 
 const INITIAL = {
   puesto: '', empresa: '', periodo: '',
@@ -23,8 +24,14 @@ export default function ExperienciaPage() {
     e.preventDefault()
     const errs = validateExperiencia(values)
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
-    if (editingId) { editExperiencia(editingId, values); setEditingId(null) }
-    else { addExperiencia(values) }
+    if (editingId) {
+      editExperiencia(editingId, values)
+      setEditingId(null)
+      toastSuccess('Experiencia actualizada.')
+    } else {
+      addExperiencia(values)
+      toastSuccess(`"${values.puesto}" en ${values.empresa} agregado.`)
+    }
     setValues(INITIAL)
     setErrors({})
   }
@@ -40,6 +47,20 @@ export default function ExperienciaPage() {
     })
     setErrors({})
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleDelete = async (item) => {
+    const confirmed = await confirmDialog({
+      title: '¿Eliminar experiencia?',
+      text: `"${item.puesto}" en ${item.empresa} será eliminado.`,
+      confirmText: 'Sí, eliminar',
+      cancelText: 'Cancelar',
+      icon: 'warning',
+    })
+    if (confirmed) {
+      deleteExperiencia(item.id)
+      toastSuccess(`"${item.puesto}" eliminado.`)
+    }
   }
 
   const handleCancel = () => { setEditingId(null); setValues(INITIAL); setErrors({}) }
@@ -128,7 +149,7 @@ export default function ExperienciaPage() {
                     <button className="ex-btn-edit" onClick={() => handleEdit(item)}>
                       Editar
                     </button>
-                    <button className="ex-btn-del" onClick={() => deleteExperiencia(item.id)}>
+                    <button className="ex-btn-del" onClick={() => handleDelete(item)}>
                       Eliminar
                     </button>
                   </div>

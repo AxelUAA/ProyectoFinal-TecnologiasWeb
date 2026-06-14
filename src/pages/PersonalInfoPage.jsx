@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useCV } from '../context/CVContext'
 import { useFormValidation } from '../hooks/useFormValidation'
 import { validatePersonalInfo } from '../utils/validations'
+import { toastSuccess } from '../utils/toast'
 import './PersonalInfoPage.css'
 
 const INITIAL = {
@@ -32,7 +33,7 @@ export default function PersonalInfoPage({ embedded = false }) {
   const onSubmit = (vals) => {
     // Preserva la foto que ya está en contexto — no vive en vals del formulario
     updatePersonalInfo({ ...vals, foto: personalInfo.foto })
-    alert('Datos guardados correctamente.')
+    toastSuccess('Datos guardados correctamente.')
   }
 
   return (
