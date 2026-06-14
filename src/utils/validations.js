@@ -39,6 +39,10 @@ export function validateSkill(values, existingSkills = []) {
     errors.nombre = 'Esta habilidad ya fue agregada'
   }
 
+  if (!values.categoria) {
+    errors.categoria = 'La categoría es requerida'
+  }
+
   if (!values.nivel) {
     errors.nivel = 'El nivel es requerido'
   } else if (values.nivel < 1 || values.nivel > 100) {

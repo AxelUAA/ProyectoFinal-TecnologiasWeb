@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useCV } from '../context/CVContext'
 import { validateEducacion } from '../utils/validations'
+import { confirmDialog, toastSuccess } from '../utils/toast'
 
 const INITIAL = {
   institucion: '', programa: '', periodo: '',
@@ -23,8 +24,14 @@ export default function EducacionPage() {
     e.preventDefault()
     const errs = validateEducacion(values)
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
-    if (editingId) { editEducacion(editingId, values); setEditingId(null) }
-    else { addEducacion(values) }
+    if (editingId) {
+      editEducacion(editingId, values)
+      setEditingId(null)
+      toastSuccess('Educación actualizada.')
+    } else {
+      addEducacion(values)
+      toastSuccess(`"${values.programa}" agregado.`)
+    }
     setValues(INITIAL)
     setErrors({})
   }
@@ -40,6 +47,20 @@ export default function EducacionPage() {
     })
     setErrors({})
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleDelete = async (item) => {
+    const confirmed = await confirmDialog({
+      title: '¿Eliminar educación?',
+      text: `"${item.programa}" en ${item.institucion} será eliminado.`,
+      confirmText: 'Sí, eliminar',
+      cancelText: 'Cancelar',
+      icon: 'warning',
+    })
+    if (confirmed) {
+      deleteEducacion(item.id)
+      toastSuccess(`"${item.programa}" eliminado.`)
+    }
   }
 
   const handleCancel = () => { setEditingId(null); setValues(INITIAL); setErrors({}) }
@@ -130,7 +151,7 @@ export default function EducacionPage() {
                     <button className="ed-btn-edit" onClick={() => handleEdit(item)}>
                       Editar
                     </button>
-                    <button className="ed-btn-del" onClick={() => deleteEducacion(item.id)}>
+                    <button className="ed-btn-del" onClick={() => handleDelete(item)}>
                       Eliminar
                     </button>
                   </div>
