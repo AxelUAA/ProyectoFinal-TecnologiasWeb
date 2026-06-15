@@ -110,6 +110,7 @@ export default function EducacionPage() {
             <label htmlFor="ed-descripcion">Descripción</label>
             <textarea id="ed-descripcion" name="descripcion" value={values.descripcion}
               onChange={handleChange} placeholder="Detalles adicionales (opcional)" rows={3} />
+            {errors.descripcion && <span className="ed-error">{errors.descripcion}</span>}
           </div>
 
           <div className="ed-btns">

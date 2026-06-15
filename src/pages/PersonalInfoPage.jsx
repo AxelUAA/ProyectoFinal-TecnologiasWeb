@@ -86,6 +86,7 @@ export default function PersonalInfoPage({ embedded = false }) {
             <input id="ciudad" name="ciudad" type="text"
               value={values.ciudad} onChange={handleChange}
               placeholder="Ej. Guadalajara, Mexico" />
+            {errors.ciudad && <span className="pi-error">{errors.ciudad}</span>}
           </div>
           <div className="pi-field">
             <label htmlFor="telefono">Telefono *</label>
@@ -110,6 +111,7 @@ export default function PersonalInfoPage({ embedded = false }) {
             value={values.descripcion} onChange={handleChange}
             placeholder="Breve resumen sobre ti y tus objetivos profesionales..."
             rows={4} />
+          {errors.descripcion && <span className="pi-error">{errors.descripcion}</span>}
         </div>
 
         <fieldset className="pi-links">

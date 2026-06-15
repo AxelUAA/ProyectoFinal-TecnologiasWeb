@@ -102,6 +102,7 @@ export default function ExperienciaPage() {
               <label htmlFor="ex-tecnologias">Tecnologías</label>
               <input id="ex-tecnologias" name="tecnologias" value={values.tecnologias}
                 onChange={handleChange} placeholder="Ej. React, TypeScript" />
+              {errors.tecnologias && <span className="ex-error">{errors.tecnologias}</span>}
             </div>
           </div>
 
@@ -109,6 +110,7 @@ export default function ExperienciaPage() {
             <label htmlFor="ex-descripcion">Descripción</label>
             <textarea id="ex-descripcion" name="descripcion" value={values.descripcion}
               onChange={handleChange} placeholder="Responsabilidades y logros (opcional)" rows={3} />
+            {errors.descripcion && <span className="ex-error">{errors.descripcion}</span>}
           </div>
 
           <div className="ex-btns">
