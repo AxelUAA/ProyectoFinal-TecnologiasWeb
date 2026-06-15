@@ -105,6 +105,7 @@ export default function SkillsPage() {
               <label htmlFor="sk-desc">Descripcion breve</label>
               <input id="sk-desc" name="descripcion" value={values.descripcion}
                 onChange={handleChange} placeholder="Ej. 3 anos de experiencia" />
+              {errors.descripcion && <span className="sk-error">{errors.descripcion}</span>}
             </div>
           </div>
 
