@@ -64,6 +64,8 @@ export default function SkillsPage() {
     }
   }
 
+  const handleCancel = () => { setEditingId(null); setValues(INITIAL); setErrors({}) }
+
   return (
     <>
       <style>{css}</style>
