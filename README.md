@@ -16,7 +16,7 @@ npm install
 npm run dev
 
 ## Deploy
-[ruta pendiente]
+https://cvbuilder-ten-silk.vercel.app/
 
 ## Integrantes
 - Axel Murillo Lopez
